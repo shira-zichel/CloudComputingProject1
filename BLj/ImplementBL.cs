@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using BE;
 
-namespace DAL
+namespace BL
 {
-    class IDAL
+    public class ImplementBL
     {
         ///////////////Administrator//////////////
         void UpdateAdministrator(Administrator administrator) { }
@@ -32,7 +34,7 @@ namespace DAL
         IEnumerable<Patient> getAllPatients() { return null; }
 
         /////////////////Prescription//////////
-        void AddPrescription(Prescription prescription) { }
+        void AddPrescription(Prescription prescription) {  }
         IEnumerable<Prescription> getAllPrescriptions() { return null; }
     }
 }
