@@ -82,12 +82,23 @@ namespace DAL
         }
         public void AddDoctor(Doctor doctor)
         {
-            if (db.Doctors.ToList().Exists(item => item.ID == doctor.ID) == false)
+            var item = (from n in db.Doctors
+                        where n.ID == doctor.ID
+                        select n).FirstOrDefault();
+            if (item==null)
             {
                 db.Doctors.Add(doctor);
                 db.SaveChanges();
             }
-            throw new Exception("doctor  exsists already");
+            else throw new Exception("doctor  exsists already");
+
+
+            //if (db.Doctors.ToList().Exists(item => item.ID == doctor.ID) == false)
+            //{
+            //    db.Doctors.Add(doctor);
+            //    db.SaveChanges();
+            //}
+            //throw new Exception("doctor  exsists already");
         }
         public void deleteDoctor(Doctor doctor)
         {
@@ -97,6 +108,12 @@ namespace DAL
             }
             db.Doctors.Remove(doctor);
             db.SaveChanges();
+        }
+        public bool ExistDoctor(int id )
+        {
+            if (db.Doctors.ToList().Exists(item => item.ID ==id) == true)
+                return true;
+            return false;
         }
         public IEnumerable<Doctor> getAllDoctors()
         {
@@ -179,6 +196,20 @@ namespace DAL
                 db.SaveChanges();
             }
             throw new Exception("Patient dosn't exsist");
+        }
+        public bool ExsistPtient(int id)
+        {
+            if (db.Patients.ToList().Exists(item => item.ID == id) == true)
+                return true;
+            return false;
+        }
+        //return all the patient's prescriptions
+        public List<Prescription> PatientPrescriptions(int id )
+        {
+            var patient = (from item in db.Patients
+                           where item.ID == id
+                           select item).FirstOrDefault();
+            return patient.Prescriptions;
         }
         public IEnumerable<Patient> getAllPatients()
         {
