@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BE;
+
 
 namespace CloudComputingProject1.Controllers
 {
     public class HomeController : Controller
     {
+       BL.ImplementBL bl = new BL.ImplementBL();
         // GET: Home2
         public ActionResult Index()
         {
@@ -107,7 +110,16 @@ namespace CloudComputingProject1.Controllers
         }
         public ActionResult DoctorsList()
         {
-            return View(/*bl.getAllDoctors*/);
+            List<Doctor> doctorsLis = new List<Doctor>();
+            try
+            {
+              doctorsLis=bl.getAllDoctors().ToList();
+            }
+            catch(Exception ex)
+            {
+                //לתפוס את החריגה ולהדפםיס שגיאה
+            }
+            return View(doctorsLis);
         }
         public ActionResult Doctors()
         {
@@ -115,7 +127,16 @@ namespace CloudComputingProject1.Controllers
         }
         public ActionResult DrugsList()
         {
-            return View(/*bl.getAllDrugs*/);
+            List<Medicine> drugsList = new List<Medicine>();
+            try
+            {
+                drugsList = bl.getAllMedicines().ToList();
+            }
+            catch (Exception ex)
+            {
+                //לתפוס את החריגה ולהדפםיס שגיאה
+            }
+            return View(drugsList);
         }
         public ActionResult Elements()
         {
@@ -129,7 +150,7 @@ namespace CloudComputingProject1.Controllers
         {
             return View();
         }
-        public ActionResult LoginManager()
+        public ActionResult LoginAdministrator()
         {
             return View();
         }
@@ -139,7 +160,16 @@ namespace CloudComputingProject1.Controllers
         }
         public ActionResult PatientList()
         {
-            return View(/*bl.getAllPatients*/);
+            List<Patient> patiensList = new List<Patient>();
+            try
+            {
+                patiensList = bl.getAllPatients().ToList();
+            }
+            catch (Exception ex)
+            {
+                //לתפוס את החריגה ולהדפםיס שגיאה
+            }
+            return View(patiensList);
         }
         public ActionResult Action()
         {
@@ -177,30 +207,48 @@ namespace CloudComputingProject1.Controllers
 
         }
         [HttpPost]
-        public void SignInDoctorBtn(string Name, string specialization, string WorkPlace, long ID, long Phone, string MailAddress)
+        public void SignInDoctorBtn(string Name, string specialization, string WorkPlace, long ID, long Phone, string MailAddress, DateTime ExpirationDate, int LicenseId)
         {
+            DoctorLicense license = new DoctorLicense();
+            license.ExpirationDate = ExpirationDate;
+            license.LicenseID = LicenseId;
+            Doctor newDoctor = new Doctor();
+            newDoctor.Name = Name;
+            newDoctor.Specialization = specialization;
+            newDoctor.WorkPlace = WorkPlace;
+            newDoctor.ID = ID;
+            newDoctor.Phone = Phone;
+            newDoctor.MailAddress = MailAddress;
+            newDoctor.License = license;
             try
             {
-                //bl.addDoctor
+                bl.AddDoctor(newDoctor); 
             }
-            catch
+            catch(Exception ex)
             {
                 //להדפיס את החרידה שנשלחת מהפונקציה
             }
-
+            //return view();
         }
-        public void SignInPatientBtn()
+        public void SignInPatientBtn(string FirstName, string LastName, long ID,  string Gender,DateTime DateOfBirth)
         {
+            Patient newPatient = new Patient();
+            newPatient.FirstName = FirstName;
+            newPatient.LastName = LastName;
+            newPatient.ID = ID;
+            newPatient.Gender = Gender;
+            newPatient.DateOfBirth = DateOfBirth;
+            newPatient.Prescriptions = new List<Prescription>();
             try
             {
-                //bl.addPatient
+                bl.AddPatient(newPatient);
             }
-            catch
+            catch(Exception ex)
             {
                 //להדפיס את החריגה שנשלחת מהפונקציה
             }
-            //להובל אותו לעמוד שמציג את רשימת המרשמים
-            //bl.PatientPrescription
+
+           
         }
     }
 }

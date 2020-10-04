@@ -7,8 +7,11 @@ namespace BE
      public class Prescription
     {
         public int ID { get; set; }
-        public string DragName { get; set; }
+        public List<Medicine> Medicines { get; set; }
         public float amount { get; set; }
         public int period { get; set; }
+        public DateTime StartData { get; set; }
+        public DateTime EndData { get; set; }
+        public Doctor ReferringDoctor { get; set; }
     }
 }

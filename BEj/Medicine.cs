@@ -9,7 +9,6 @@ namespace BE
         public string GenericName { get; set; }
         public string ActiveIngredients { get; set; }
         public string DoseCharacteristics { get; set; }
-        public string Picture { get; set; }
         public int ID { get; set; }
         public override string ToString()
         {
