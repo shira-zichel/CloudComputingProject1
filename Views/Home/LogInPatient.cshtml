@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "LogInPatient";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<section class="appointment-area">
+    <div class="container">
+        <div class="row justify-content-between align-items-center pb-120 appointment-wrap">
+            <div class="col-lg-6 col-md-6 appointment-right pt-60 pb-60">
+                <form class="form-wrap" action="#">
+                    <h3 class="pb-20 text-center mb-30">Hello Patient</h3>
+                    <h6 class="pb-20 text-center mb-30">please enter details to continue</h6>
+                    <input type="text" class="form-control" name="Id" placeholder="Id " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Id'">
+                    <a href="@Url.Action("LogInPatientBtn", "Home")" class="btn primary-btn text-uppercase" role="button">Log In</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
