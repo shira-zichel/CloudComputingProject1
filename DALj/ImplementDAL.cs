@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -109,11 +110,11 @@ namespace DAL
             db.Doctors.Remove(doctor);
             db.SaveChanges();
         }
-        public bool ExistDoctor(int id )
+        public void ExistDoctor(int id )
         {
-            if (db.Doctors.ToList().Exists(item => item.ID ==id) == true)
-                return true;
-            return false;
+            if (db.Doctors.ToList().Exists(item => item.ID == id) == false)
+                throw new Exception("Doctor doesn't exist");
+            
         }
         public IEnumerable<Doctor> getAllDoctors()
         {
@@ -197,11 +198,10 @@ namespace DAL
             }
             throw new Exception("Patient dosn't exsist");
         }
-        public bool ExsistPtient(int id)
+        public void ExsistPtient(int id)
         {
-            if (db.Patients.ToList().Exists(item => item.ID == id) == true)
-                return true;
-            return false;
+            if (db.Patients.ToList().Exists(item => item.ID == id) == false)
+                throw new Exception("Patient doesn't exist");
         }
         //return all the patient's prescriptions
         public List<Prescription> PatientPrescriptions(int id )

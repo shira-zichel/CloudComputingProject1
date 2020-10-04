@@ -79,9 +79,18 @@ namespace BL
                 throw ex;
             }
         }
-        bool ExistDoctor(int id)
+        void ExistDoctor(int id)
         {
-            return dal.ExistDoctor(id);  
+            try
+            {
+                dal.ExistDoctor(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
         IEnumerable<Doctor> getAllDoctors()
         {
@@ -166,9 +175,18 @@ namespace BL
                 throw ex;
             }
         }
-        bool ExsistPtient(int id)
+        void ExsistPtient(int id)
         {
-            return dal.ExsistPtient(id);
+            try
+            {
+                dal.ExsistPtient(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
         List<Prescription> PatientPrescriptions(int id)
         {
