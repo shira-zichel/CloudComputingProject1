@@ -44,10 +44,10 @@ namespace DAL
             db.Administrators.Add(administrator);
             db.SaveChanges();
         }
-        public void deleteAdministrator(Administrator administrator)
+        public void deleteAdministrator(int id)
         {
             var admin = (from item in db.Administrators.ToList()
-                         where (item.ID == administrator.ID)
+                         where (item.ID == id)
                          select item).FirstOrDefault();
             if (admin == null)
             {
@@ -57,6 +57,13 @@ namespace DAL
             {
                 db.Administrators.Remove(admin);
                 db.SaveChanges();
+            }
+        }
+        public void isAdministrator(string code)
+        {
+            if (code !="12345")
+            {
+                throw new Exception("incorrect code");
             }
         }
         public IEnumerable<Administrator> getAllAdministrators()
@@ -101,14 +108,18 @@ namespace DAL
             //}
             //throw new Exception("doctor  exsists already");
         }
-        public void deleteDoctor(Doctor doctor)
+        public void deleteDoctor(int id)
         {
-            if (db.Doctors.ToList().Exists(item => item.ID == doctor.ID) == false)
-            {
+            var d = (from item in db.Doctors
+                     where item.ID == id
+                     select item).FirstOrDefault();
+            if(d==null)
                 throw new Exception("doctor dosn't exsist");
+            else
+            {
+                db.Doctors.Remove(d);
+                db.SaveChanges();
             }
-            db.Doctors.Remove(doctor);
-            db.SaveChanges();
         }
         public void ExistDoctor(int id )
         {
@@ -147,14 +158,18 @@ namespace DAL
             }
             throw new Exception("Medicine  exsist already");
         }
-        public void  deleteMediciner(Medicine medicine)
+        public void  deleteMediciner(int id)
         {
-            if (db.Medicines.ToList().Exists(item => item.ID == medicine.ID) == true)
+            var m = (from item in db.Medicines
+                     where item.ID == id
+                     select item).FirstOrDefault();
+            if (m == null)
+                throw new Exception("medicine dosn't exsist");
+            else
             {
-                db.Medicines.Remove(medicine);
+                db.Medicines.Remove(m);
                 db.SaveChanges();
             }
-            throw new Exception("Medicine dosn't exsist");
 
         }
         public IEnumerable<Medicine> getAllMedicines()
@@ -189,14 +204,18 @@ namespace DAL
             }
             throw new Exception("Patient  exsists already");
         }
-        public void  deletePatient(Patient patient)
+        public void  deletePatient(int id)
         {
-            if (db.Patients.ToList().Exists(item => item.ID == patient.ID) == true)
+            var p = (from item in db.Patients
+                     where item.ID == id
+                     select item).FirstOrDefault();
+            if (p == null)
+                throw new Exception("patient dosn't exsist");
+            else
             {
-                db.Patients.Remove(patient);
+                db.Patients.Remove(p);
                 db.SaveChanges();
             }
-            throw new Exception("Patient dosn't exsist");
         }
         public void ExsistPtient(int id)
         {

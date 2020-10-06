@@ -36,13 +36,25 @@ namespace BL
                 throw ex;
             }
         }
-        void deleteAdministrator(Administrator administrator) 
+        void deleteAdministrator(int id) 
         {
-            dal.deleteAdministrator(administrator);
+            dal.deleteAdministrator(id);
         }
         IEnumerable<Administrator> getAllAdministrators()
         {
             return dal.getAllAdministrators(); 
+        }
+        void isAdministrator(string code)
+        {
+            try
+            {
+                dal.isAdministrator(code);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         //////////Doctor//////////////////////
@@ -68,11 +80,11 @@ namespace BL
                 throw ex;
             }
         }
-        void deleteDoctor(Doctor doctor) 
+        void deleteDoctor(int id) 
         {
             try
             {
-                dal.deleteDoctor(doctor);
+                dal.deleteDoctor(id);
             }
             catch (Exception ex)
             {
@@ -122,11 +134,11 @@ namespace BL
                 throw ex;
             }
         }
-        void deleteMediciner(Medicine medicine) 
+        void deleteMediciner(int id) 
         {
             try
             {
-                dal.deleteMediciner(medicine);
+                dal.deleteMediciner(id);
             }
             catch (Exception ex)
             {
@@ -163,11 +175,11 @@ namespace BL
                 throw ex;
             }
         }
-        void deletePatient(Patient patient)
+        void deletePatient(int id)
         {
             try
             {
-                dal.deletePatient(patient);
+                dal.deletePatient(id);
             }
             catch (Exception ex)
             {
