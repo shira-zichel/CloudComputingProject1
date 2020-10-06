@@ -59,13 +59,8 @@ namespace DAL
                 db.SaveChanges();
             }
         }
-        public void isAdministrator(string code)
-        {
-            if (code !="12345")
-            {
-                throw new Exception("incorrect code");
-            }
-        }
+      
+        
         public IEnumerable<Administrator> getAllAdministrators()
         {
             return db.Administrators.ToList();
@@ -100,13 +95,6 @@ namespace DAL
             }
             else throw new Exception("doctor  exsists already");
 
-
-            //if (db.Doctors.ToList().Exists(item => item.ID == doctor.ID) == false)
-            //{
-            //    db.Doctors.Add(doctor);
-            //    db.SaveChanges();
-            //}
-            //throw new Exception("doctor  exsists already");
         }
         public void deleteDoctor(int id)
         {
@@ -121,12 +109,7 @@ namespace DAL
                 db.SaveChanges();
             }
         }
-        public void ExistDoctor(int id )
-        {
-            if (db.Doctors.ToList().Exists(item => item.ID == id) == false)
-                throw new Exception("Doctor doesn't exist");
-            
-        }
+        
         public IEnumerable<Doctor> getAllDoctors()
         {
             return db.Doctors.ToList();
@@ -217,19 +200,7 @@ namespace DAL
                 db.SaveChanges();
             }
         }
-        public void ExsistPtient(int id)
-        {
-            if (db.Patients.ToList().Exists(item => item.ID == id) == false)
-                throw new Exception("Patient doesn't exist");
-        }
-        //return all the patient's prescriptions
-        public List<Prescription> PatientPrescriptions(int id )
-        {
-            var patient = (from item in db.Patients
-                           where item.ID == id
-                           select item).FirstOrDefault();
-            return patient.Prescriptions;
-        }
+
         public IEnumerable<Patient> getAllPatients()
         {
             return db.Patients.ToList();
