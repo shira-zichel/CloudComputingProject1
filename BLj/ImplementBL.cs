@@ -87,12 +87,8 @@ namespace BL
                 throw ex;
             }
         }
-        void ExistDoctor(int id)
-        {
-          if (dal.getAllDoctors().ToList().Exists(item => item.ID == id) == false)
-              throw new Exception("Doctor doesn't exist");
-        }
-        Doctor getDoctorDetails(int id)
+       
+        Doctor getDoctor(int id)
         {
             Doctor d = (from item in dal.getAllDoctors().ToList()
                         where item.ID == id
@@ -144,7 +140,7 @@ namespace BL
                 throw ex;
             }
         }
-        Medicine GetMedicineDetails(int id)
+        Medicine GetMedicine(int id)
         {
             Medicine m= (from item in dal.getAllMedicines().ToList()
                         where item.ID == id
@@ -195,12 +191,8 @@ namespace BL
                 throw ex;
             }
         }
-        void ExsistPtient(int id)
-        {
-          if (dal.getAllPatients().ToList().Exists(item => item.ID == id) == false)
-              throw new Exception("Patient doesn't exist");
-        }
-        Patient GetPatientDetails(int id)
+       
+        Patient GetPatient(int id)
         {
             Patient p = (from item in dal.getAllPatients().ToList()
                           where item.ID == id
@@ -208,7 +200,7 @@ namespace BL
             if (p != null)
                 return p;
             else
-                throw new Exception("medicine doesn't exist");
+                throw new Exception("patient doesn't exist");
         }
         List<Prescription> PatientPrescriptions(int id)
         {
@@ -242,7 +234,7 @@ namespace BL
                 throw ex;
             }
         }
-        Prescription GetPrescriptionDetails(int id)
+        Prescription GetPrescription(int id)
         {
             Prescription p = (from item in dal.getAllPrescriptions().ToList()
                           where item.ID == id
@@ -250,7 +242,7 @@ namespace BL
             if (p != null)
                 return p;
             else
-                throw new Exception("medicine doesn't exist");
+                throw new Exception("prescription doesn't exist");
         }
         IEnumerable<Prescription> getAllPrescriptions()
         { 
