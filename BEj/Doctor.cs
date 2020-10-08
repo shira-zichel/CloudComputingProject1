@@ -12,7 +12,7 @@ namespace BE
         public string Name { get; set; }
         public int age { get; set; }
         public string WorkPlace { get; set; }
-        public int ID { get; set; }
+        public string ID { get; set; }
         public DoctorLicense License { get; set; }
 
         public override string ToString()

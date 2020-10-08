@@ -9,7 +9,7 @@ namespace BE
     public class Administrator
     {
         public string UserName { get; set; }
-        public int ID { get; set; }
+        public string ID { get; set; }
         public int Password { get; set; }
 
         public override string ToString()

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BE;
+using BL;
 
 namespace CloudComputingProject1
 {
@@ -11,6 +13,9 @@ namespace CloudComputingProject1
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            ImplementBL implementBL = new ImplementBL();
+            implementBL.AddPatient(new Patient { FirstName = "shira", ID = "147", Prescriptions = null });
+            //implementBL.deletePatient(789);
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(

@@ -6,7 +6,7 @@ namespace BE
 {
      public class Prescription
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public List<Medicine> Medicines { get; set; }
         public float amount { get; set; }
         public int period { get; set; }

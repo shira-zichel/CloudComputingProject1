@@ -9,6 +9,6 @@ namespace BE
     public class DoctorLicense
     {
         public DateTime ExpirationDate { get; set; }
-        public int LicenseID { get; set; } 
+        public string LicenseID { get; set; } 
     }
 }

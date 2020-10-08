@@ -14,7 +14,7 @@ namespace DAL
     {
         PharmacyContext db = new PharmacyContext();
         ///////////////Administrator//////////////
-        public void  UpdateAdministrator(Administrator administrator) 
+        public void UpdateAdministrator(Administrator administrator)
         {
             var admin = (from item in db.Administrators.ToList()
                          where (item.ID == administrator.ID)
@@ -29,14 +29,14 @@ namespace DAL
                 db.Administrators.Add(administrator);
                 db.SaveChanges();
             }
-            
-         
+
+
         }
         public void addAdministrator(Administrator administrator)
         {
             foreach (var item in db.Administrators)
             {
-                if (item.ID==administrator.ID)
+                if (item.ID == administrator.ID)
                 {
                     throw new Exception("administrator  exsists already");
                 }
@@ -44,7 +44,7 @@ namespace DAL
             db.Administrators.Add(administrator);
             db.SaveChanges();
         }
-        public void deleteAdministrator(int id)
+        public void deleteAdministrator(string id)
         {
             var admin = (from item in db.Administrators.ToList()
                          where (item.ID == id)
@@ -59,8 +59,8 @@ namespace DAL
                 db.SaveChanges();
             }
         }
-      
-        
+
+
         public IEnumerable<Administrator> getAllAdministrators()
         {
             return db.Administrators.ToList();
@@ -70,8 +70,8 @@ namespace DAL
         public void UpdateDoctor(Doctor doctor)
         {
             var doc = (from item in db.Doctors.ToList()
-                         where (item.ID == doctor.ID)
-                         select item).FirstOrDefault();
+                       where (item.ID == doctor.ID)
+                       select item).FirstOrDefault();
             if (doc == null)
             {
                 throw new Exception("doctor dosn't exsist");
@@ -88,7 +88,7 @@ namespace DAL
             var item = (from n in db.Doctors
                         where n.ID == doctor.ID
                         select n).FirstOrDefault();
-            if (item==null)
+            if (item == null)
             {
                 db.Doctors.Add(doctor);
                 db.SaveChanges();
@@ -96,12 +96,12 @@ namespace DAL
             else throw new Exception("doctor  exsists already");
 
         }
-        public void deleteDoctor(int id)
+        public void deleteDoctor(string id)
         {
             var d = (from item in db.Doctors
                      where item.ID == id
                      select item).FirstOrDefault();
-            if(d==null)
+            if (d == null)
                 throw new Exception("doctor dosn't exsist");
             else
             {
@@ -109,7 +109,7 @@ namespace DAL
                 db.SaveChanges();
             }
         }
-        
+
         public IEnumerable<Doctor> getAllDoctors()
         {
             return db.Doctors.ToList();
@@ -119,8 +119,8 @@ namespace DAL
         public void UpdateMedicine(Medicine medicine)
         {
             var med = (from item in db.Medicines.ToList()
-                         where (item.ID == medicine.ID)
-                         select item).FirstOrDefault();
+                       where (item.ID == medicine.ID)
+                       select item).FirstOrDefault();
             if (med == null)
             {
                 throw new Exception("Medicine dosn't exsist");
@@ -141,7 +141,7 @@ namespace DAL
             }
             throw new Exception("Medicine  exsist already");
         }
-        public void  deleteMediciner(int id)
+        public void deleteMediciner(string id)
         {
             var m = (from item in db.Medicines
                      where item.ID == id
@@ -157,7 +157,7 @@ namespace DAL
         }
         public IEnumerable<Medicine> getAllMedicines()
         {
-            return db.Medicines.ToList(); 
+            return db.Medicines.ToList();
         }
 
         //////////Patient////////////////
@@ -167,7 +167,7 @@ namespace DAL
             var pat = (from item in db.Patients.ToList()
                        where (item.ID == patient.ID)
                        select item).FirstOrDefault();
-            if (pat== null)
+            if (pat == null)
             {
                 throw new Exception("Patient dosn't exsist");
             }
@@ -178,16 +178,19 @@ namespace DAL
                 db.SaveChanges();
             }
         }
-        public void  AddPatient(Patient patient)
+        public void AddPatient(Patient patient)
         {
             if (db.Patients.ToList().Exists(item => item.ID == patient.ID) == false)
             {
                 db.Patients.Add(patient);
                 db.SaveChanges();
             }
-            throw new Exception("Patient  exsists already");
+            else
+            {
+                throw new Exception("Patient  exsists already");
+            }
         }
-        public void  deletePatient(int id)
+        public void deletePatient(string id)
         {
             var p = (from item in db.Patients
                      where item.ID == id
@@ -218,13 +221,13 @@ namespace DAL
         }
         public IEnumerable<Prescription> getAllPrescriptions()
         {
-            return db.Prescriptions.ToList(); 
+            return db.Prescriptions.ToList();
         }
     }
     public class PharmacyContext : DbContext
     {
 
-        public PharmacyContext() : base()
+        public PharmacyContext() : base("PharmacyContext")
         {
         }
 
@@ -236,7 +239,16 @@ namespace DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+        private void FixEfProviderServicesProblem()
+        {
+            // The Entity Framework provider type 'System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer'
+            // for the 'System.Data.SqlClient' ADO.NET provider could not be loaded.
+            // Make sure the provider assembly is available to the running application.
+            // See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
     }
 

@@ -12,7 +12,7 @@ namespace BL
     {
         DAL.ImplementDAL dal = new DAL.ImplementDAL();
         ///////////////Administrator//////////////
-        void UpdateAdministrator(Administrator administrator)
+        public void UpdateAdministrator(Administrator administrator)
         {
             try
             {
@@ -21,9 +21,9 @@ namespace BL
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
-        void addAdministrator(Administrator administrator)
+        public void addAdministrator(Administrator administrator)
         {
             try
             {
@@ -36,36 +36,36 @@ namespace BL
                 throw ex;
             }
         }
-        void deleteAdministrator(int id) 
+        public void deleteAdministrator(string id)
         {
             dal.deleteAdministrator(id);
         }
-        IEnumerable<Administrator> getAllAdministrators()
+        public IEnumerable<Administrator> getAllAdministrators()
         {
-            return dal.getAllAdministrators(); 
+            return dal.getAllAdministrators();
         }
-        void isAdministrator(string code)
+        public void isAdministrator(string code)
         {
             if (code != "12345")
             {
-              throw new Exception("incorrect code");
+                throw new Exception("incorrect code");
             }
-         
+
         }
 
         //////////Doctor//////////////////////
-        void UpdateDoctor(Doctor doctor)
+        public void UpdateDoctor(Doctor doctor)
         {
             try
             {
                 dal.UpdateDoctor(doctor);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-        void AddDoctor(Doctor doctor)
+        public void AddDoctor(Doctor doctor)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace BL
                 throw ex;
             }
         }
-        void deleteDoctor(int id) 
+        public void deleteDoctor(string id)
         {
             try
             {
@@ -87,8 +87,8 @@ namespace BL
                 throw ex;
             }
         }
-       
-        Doctor getDoctor(int id)
+
+        public Doctor getDoctor(string id)
         {
             Doctor d = (from item in dal.getAllDoctors().ToList()
                         where item.ID == id
@@ -98,13 +98,13 @@ namespace BL
             else
                 throw new Exception("doctor doesn't exist");
         }
-        IEnumerable<Doctor> getAllDoctors()
+        public IEnumerable<Doctor> getAllDoctors()
         {
-            return dal.getAllDoctors(); 
+            return dal.getAllDoctors();
         }
 
         ///////////Medicine////////////////
-        void UpdateMedicine(Medicine medicine)
+        public void UpdateMedicine(Medicine medicine)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace BL
                 throw ex;
             }
         }
-        void AddMedicine(Medicine medicine)
+        public void AddMedicine(Medicine medicine)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace BL
                 throw ex;
             }
         }
-        void deleteMediciner(int id) 
+        public void deleteMediciner(string id)
         {
             try
             {
@@ -140,23 +140,23 @@ namespace BL
                 throw ex;
             }
         }
-        Medicine GetMedicine(int id)
+        public Medicine GetMedicine(string id)
         {
-            Medicine m= (from item in dal.getAllMedicines().ToList()
-                        where item.ID == id
-                        select item).FirstOrDefault();
+            Medicine m = (from item in dal.getAllMedicines().ToList()
+                          where item.ID == id
+                          select item).FirstOrDefault();
             if (m != null)
                 return m;
             else
                 throw new Exception("medicine doesn't exist");
         }
-        IEnumerable<Medicine> getAllMedicines() 
-        { 
-            return dal.getAllMedicines(); 
+        public IEnumerable<Medicine> getAllMedicines()
+        {
+            return dal.getAllMedicines();
         }
 
         //////////Patient////////////////
-        void UpdatePatient(Patient patient)
+        public void UpdatePatient(Patient patient)
         {
             try
             {
@@ -167,7 +167,7 @@ namespace BL
                 throw ex;
             }
         }
-        void AddPatient(Patient patient)
+        public void AddPatient(Patient patient)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace BL
                 throw ex;
             }
         }
-        void deletePatient(int id)
+        public void deletePatient(string id)
         {
             try
             {
@@ -191,33 +191,33 @@ namespace BL
                 throw ex;
             }
         }
-       
-        Patient GetPatient(int id)
+
+        public Patient GetPatient(string id)
         {
             Patient p = (from item in dal.getAllPatients().ToList()
-                          where item.ID == id
-                          select item).FirstOrDefault();
+                         where item.ID == id
+                         select item).FirstOrDefault();
             if (p != null)
                 return p;
             else
                 throw new Exception("patient doesn't exist");
         }
-        List<Prescription> PatientPrescriptions(int id)
+        public List<Prescription> PatientPrescriptions(string id)
         {
-           var patient = (from item in dal.getAllPatients().ToList()
-                               where item.ID == id
-                               select item).FirstOrDefault();
-           return patient.Prescriptions;
+            var patient = (from item in dal.getAllPatients().ToList()
+                           where item.ID == id
+                           select item).FirstOrDefault();
+            return patient.Prescriptions;
         }
-        IEnumerable<Patient> getAllPatients()
+        public IEnumerable<Patient> getAllPatients()
         {
             return dal.getAllPatients();
         }
 
         /////////////////Prescription//////////
-        void AddPrescription(Prescription prescription)
-        { 
-            if(prescription.ReferringDoctor.License.ExpirationDate.Date<DateTime.Today.Date)
+        public void AddPrescription(Prescription prescription)
+        {
+            if (prescription.ReferringDoctor.License.ExpirationDate.Date < DateTime.Today.Date)
             {
                 throw new Exception("Invalid doctor license");
             }
@@ -234,19 +234,19 @@ namespace BL
                 throw ex;
             }
         }
-        Prescription GetPrescription(int id)
+        public Prescription GetPrescription(string id)
         {
             Prescription p = (from item in dal.getAllPrescriptions().ToList()
-                          where item.ID == id
-                          select item).FirstOrDefault();
+                              where item.ID == id
+                              select item).FirstOrDefault();
             if (p != null)
                 return p;
             else
                 throw new Exception("prescription doesn't exist");
         }
-        IEnumerable<Prescription> getAllPrescriptions()
-        { 
-            return dal.getAllPrescriptions(); 
+        public IEnumerable<Prescription> getAllPrescriptions()
+        {
+            return dal.getAllPrescriptions();
         }
     }
 }
