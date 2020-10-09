@@ -139,7 +139,7 @@ namespace DAL
                 db.Medicines.Add(medicine);
                 db.SaveChanges();
             }
-            throw new Exception("Medicine  exsist already");
+            else throw new Exception("Medicine  exsist already");
         }
         public void deleteMediciner(string id)
         {
@@ -217,7 +217,7 @@ namespace DAL
                 db.Prescriptions.Add(prescription);
                 db.SaveChanges();
             }
-            throw new Exception("Prescription exsists already");
+            else throw new Exception("Prescription exsists already");
         }
         public IEnumerable<Prescription> getAllPrescriptions()
         {
