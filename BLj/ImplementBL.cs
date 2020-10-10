@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using BE;
 
@@ -247,6 +248,16 @@ namespace BL
         public IEnumerable<Prescription> getAllPrescriptions()
         {
             return dal.getAllPrescriptions();
+        }
+        public int MedicinePerPeriod(string medicine,DateTime startDate,DateTime endDate)
+        {
+            int sum = 0;
+            foreach (var item in dal.getAllPrescriptions())
+            {
+                if (item.StartData >= startDate && item.StartData <= endDate && item.Medicines.Exists(m=>m.Name==medicine))
+                    sum += 1;
+            }
+            return sum;
         }
     }
 }
