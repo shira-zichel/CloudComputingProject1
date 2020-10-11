@@ -13,7 +13,7 @@ namespace BE
         public int age { get; set; }
         public string WorkPlace { get; set; }
         public string ID { get; set; }
-        public DoctorLicense License { get; set; }
+        public DateTime ExpirationDate { get; set; }
 
         public override string ToString()
         {

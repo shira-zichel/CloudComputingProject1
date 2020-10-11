@@ -218,7 +218,7 @@ namespace BL
         /////////////////Prescription//////////
         public void AddPrescription(Prescription prescription)
         {
-            if (prescription.ReferringDoctor.License.ExpirationDate.Date < DateTime.Today.Date)
+            if (prescription.ReferringDoctor.ExpirationDate.Date < DateTime.Today.Date)
             {
                 throw new Exception("Invalid doctor license");
             }
