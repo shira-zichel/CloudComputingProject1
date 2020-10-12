@@ -10,6 +10,7 @@ namespace BE
     {
         public string UserName { get; set; }
         public string ID { get; set; }
+        public int Idkey { get; set; }
         public int Password { get; set; }
 
         public override string ToString()

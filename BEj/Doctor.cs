@@ -12,6 +12,7 @@ namespace BE
         public string Name { get; set; }
         public int age { get; set; }
         public string WorkPlace { get; set; }
+        public int Idkey { get; set; }
         public string ID { get; set; }
         public DateTime ExpirationDate { get; set; }
 

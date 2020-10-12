@@ -3,9 +3,14 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.Entity.Validation;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.UI.WebControls;
 using BE;
 
 namespace DAL
@@ -119,7 +124,7 @@ namespace DAL
         public void UpdateMedicine(Medicine medicine)
         {
             var med = (from item in db.Medicines.ToList()
-                       where (item.ID == medicine.ID)
+                       where (item.MedecienId == medicine.MedecienId)
                        select item).FirstOrDefault();
             if (med == null)
             {
@@ -134,17 +139,17 @@ namespace DAL
         }
         public void AddMedicine(Medicine medicine)
         {
-            if (db.Medicines.ToList().Exists(item => item.ID == medicine.ID) == false)
+            if (db.Medicines.ToList().Exists(item => item.MedecienId == medicine.MedecienId) == false)
             {
                 db.Medicines.Add(medicine);
                 db.SaveChanges();
             }
             else throw new Exception("Medicine  exsist already");
         }
-        public void deleteMediciner(string id)
+        public void deleteMediciner(string MedecienId)
         {
             var m = (from item in db.Medicines
-                     where item.ID == id
+                     where item.MedecienId == MedecienId
                      select item).FirstOrDefault();
             if (m == null)
                 throw new Exception("medicine dosn't exsist");
@@ -223,7 +228,9 @@ namespace DAL
         {
             return db.Prescriptions.ToList();
         }
+        
     }
+
     public class PharmacyContext : DbContext
     {
 
@@ -239,7 +246,7 @@ namespace DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+            //Database.SetInitializer<PharmacyContext>(new DropCreateDatabaseIfModelChanges<PharmacyContext>());
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
         private void FixEfProviderServicesProblem()
@@ -250,6 +257,9 @@ namespace DAL
             // See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
         }
+        
+
+
     }
 
 }

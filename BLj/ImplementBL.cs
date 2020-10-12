@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Data.Entity.Validation;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using BE;
-
+using DAL;
+using Microsoft.Office.Interop.Excel;
+using OpenQA.Selenium.Remote;
+using _Excel = Microsoft.Office.Interop.Excel;
 namespace BL
 {
     public class ImplementBL
@@ -144,7 +144,7 @@ namespace BL
         public Medicine GetMedicine(string id)
         {
             Medicine m = (from item in dal.getAllMedicines().ToList()
-                          where item.ID == id
+                          where item.MedecienId == id
                           select item).FirstOrDefault();
             if (m != null)
                 return m;
@@ -249,15 +249,64 @@ namespace BL
         {
             return dal.getAllPrescriptions();
         }
-        public int MedicinePerPeriod(string medicine,DateTime startDate,DateTime endDate)
+        public int MedicinePerPeriod(string medicine, DateTime startDate, DateTime endDate)
         {
             int sum = 0;
             foreach (var item in dal.getAllPrescriptions())
             {
-                if (item.StartData >= startDate && item.StartData <= endDate && item.Medicines.Exists(m=>m.Name==medicine))
+                if (item.StartData >= startDate && item.StartData <= endDate && item.Medicines.Exists(m => m.Name == medicine))
                     sum += 1;
             }
             return sum;
         }
-    }
-}
+        //export from excel file
+        public void ImportDataFromExcel()//put the  medicines-data from the excel file in the database
+        {
+            string FilePath = "C:\\Users\\admin\\Desktop\\פרויקט טובבב 22\\medicine.xlsx";
+            _Application excel = new _Excel.Application();
+            Workbook wb = excel.Workbooks.Open(FilePath);
+            Worksheet ws = wb.Worksheets[1];
+            string name = string.Empty, genericName = string.Empty, producer = string.Empty, active = string.Empty, proparties = string.Empty, ndc = string.Empty;
+            for (int i = 2; i < 1001; i++)
+            {
+                name = Convert.ToString(ws.Cells[1][i].Value2);
+                genericName = Convert.ToString(ws.Cells[2][i].Value2);
+                producer = Convert.ToString(ws.Cells[3][i].Value2);
+                active = Convert.ToString(ws.Cells[4][i].Value2);
+                proparties = Convert.ToString(ws.Cells[5][i].Value2);
+                ndc = Convert.ToString(ws.Cells[7][i].Value2);
+               
+                using (var ctx = new PharmacyContext())
+                {
+                    var drug = new Medicine { Properties = proparties, ActiveIngredients = active, GenericName = genericName, Name = name, Producer = producer, Ndc = ndc };
+                    ctx.Medicines.Add(drug);
+                    try
+                    {
+                        ctx.SaveChanges();
+                        // your code for insert here
+                    }
+                    catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                    {
+                        Exception raise = dbEx;
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                string message = string.Format("{0}:{1}",
+                                    validationErrors.Entry.Entity.ToString(),
+                                    validationError.ErrorMessage);
+                                // raise a new exception nesting  
+                                // the current instance as InnerException  
+                                raise = new InvalidOperationException(message, raise);
+                            }
+                        }
+                        throw raise;
+                    }
+                    
+                   
+                }
+
+            }
+
+        }
+    } }
