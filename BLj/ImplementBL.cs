@@ -216,7 +216,7 @@ namespace BL
         }
 
         /////////////////Prescription//////////
-        public void AddPrescription(Prescription prescription)
+        public void AddPrescription(Prescription prescription, string patientId)
         {
             if (prescription.ReferringDoctor.ExpirationDate.Date < DateTime.Today.Date)
             {
@@ -227,7 +227,7 @@ namespace BL
             //more checking
             try
             {
-                dal.AddPrescription(prescription);
+                dal.AddPrescription(prescription,patientId);
             }
             catch (Exception ex)
             {

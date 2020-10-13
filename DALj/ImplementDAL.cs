@@ -215,11 +215,14 @@ namespace DAL
         }
 
         /////////////////Prescription//////////
-        public void AddPrescription(Prescription prescription)
+        public void AddPrescription(Prescription prescription,string patientId)
         {
             if (db.Prescriptions.ToList().Exists(item => item.ID == prescription.ID) == false)
             {
                 db.Prescriptions.Add(prescription);
+                Patient p = db.Patients.ToList().FirstOrDefault(item => item.ID == patientId);
+                p.Prescriptions.Add(prescription);
+                
                 db.SaveChanges();
             }
             else throw new Exception("Prescription exsists already");
