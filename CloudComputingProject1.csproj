@@ -120,10 +120,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\DrugController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\PrescriptionController.cs" />
+    <Compile Include="Controllers\ShowChartsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DoctorModel.cs" />
+    <Compile Include="Models\DoctorModelClass.cs" />
+    <Compile Include="Models\DrugModel.cs" />
+    <Compile Include="Models\GraphDrug.cs" />
+    <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\MedicineModel.cs" />
+    <Compile Include="Models\PrescriptionAndListOfPrescriptions.cs" />
+    <Compile Include="Models\PrescriptionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +192,7 @@
     <Content Include="img\blog\prev.jpg" />
     <Content Include="img\blog\s-img.jpg" />
     <Content Include="img\blog\user-info.png" />
+    <Content Include="img\DefaultImageForDoctor.png" />
     <Content Include="img\department\a1.jpg" />
     <Content Include="img\elements\a.jpg" />
     <Content Include="img\elements\a2.jpg" />
@@ -208,19 +222,21 @@
     <Content Include="img\elements\user1.png" />
     <Content Include="img\elements\user2.png" />
     <Content Include="img\feedback-bg.jpg" />
+    <Content Include="img\Graph.jpg" />
     <Content Include="img\hero-bg.jpg" />
+    <Content Include="img\kindsOfDrugs.jpg" />
     <Content Include="img\l1.png" />
     <Content Include="img\l2.png" />
     <Content Include="img\l3.png" />
     <Content Include="img\l4.png" />
     <Content Include="img\l5.png" />
     <Content Include="img\logo.png" />
+    <Content Include="img\PackOfMedicine.jpg" />
     <Content Include="img\play-btn.png" />
+    <Content Include="img\prescription.jpg" />
     <Content Include="img\r1.png" />
     <Content Include="img\r2.png" />
     <Content Include="img\review-bg.jpg" />
-    <Content Include="img\s1.jpg" />
-    <Content Include="img\s2.jpg" />
     <Content Include="img\s3.jpg" />
     <Content Include="img\t1.jpg" />
     <Content Include="img\t2.jpg" />
@@ -318,6 +334,7 @@
     <Content Include="Medical - Doc\js\.DS_Store" />
     <Content Include="Medical - Doc\syntax-highlighter\.DS_Store" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -328,6 +345,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Views\mail.php" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -340,8 +358,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\.DS_Store" />
     <Content Include="scss\.DS_Store" />
@@ -444,27 +460,29 @@
     <Content Include="scss\theme\_mixins.scss" />
     <Content Include="scss\theme\_reset.scss" />
     <Content Include="scss\theme\_variables.scss" />
-    <Content Include="Views\Home\BlogHome.cshtml" />
-    <Content Include="Views\Home\BlogSingle.cshtml" />
-    <Content Include="Views\Home\Departments.cshtml" />
-    <Content Include="Views\Home\Doctors.cshtml" />
-    <Content Include="Views\Home\Elements.cshtml" />
-    <Content Include="Views\Home\Features.cshtml" />
-    <Content Include="Views\Home\SignInDoctor.cshtml" />
     <Content Include="Views\Home\LoginAdministrator.cshtml" />
-    <Content Include="Views\Home\SignInPatient.cshtml" />
-    <Content Include="Views\Home\Action.cshtml" />
-    <Content Include="Views\Home\LogInDoctor.cshtml" />
-    <Content Include="Views\Home\LogInPatient.cshtml" />
-    <Content Include="Views\Home\DrugsList.cshtml" />
-    <Content Include="Views\Home\PatientList.cshtml" />
-    <Content Include="Views\Home\DoctorsList.cshtml" />
-    <Content Include="Views\Home\SignInPatientBtn.cshtml" />
+    <Content Include="Views\Doctor\LogInDoctor.cshtml" />
+    <Content Include="Views\Doctor\DoctorsList.cshtml" />
+    <Content Include="Views\Home\LoginAdministratorBtn.cshtml" />
+    <Content Include="Views\Drug\AddDrug.cshtml" />
+    <Content Include="Views\Doctor\DetailsDoctor.cshtml" />
+    <Content Include="Views\Doctor\EditDoctor.cshtml" />
+    <Content Include="Views\Doctor\AddDoctor.cshtml" />
+    <Content Include="Views\Patient\PatientsList.cshtml" />
+    <Content Include="Views\Patient\CreatePatient.cshtml" />
+    <Content Include="Views\Patient\EditPatient.cshtml" />
+    <Content Include="Views\Patient\DetailsPatient.cshtml" />
+    <Content Include="Views\Home\GraphDrug.cshtml" />
+    <Content Include="Views\Prescription\PrescriptionsList.cshtml" />
+    <Content Include="Views\Drug\DetailsDrug.cshtml" />
+    <Content Include="Views\Drug\EditDrug.cshtml" />
+    <Content Include="Views\Drug\DrugsList.cshtml" />
+    <Content Include="Views\Prescription\AddPrescription.cshtml" />
+    <Content Include="Views\Doctor\DoctorEnterPatientsId.cshtml" />
+    <Content Include="Views\ShowCharts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Home2\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

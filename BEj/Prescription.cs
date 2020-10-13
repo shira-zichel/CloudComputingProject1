@@ -7,11 +7,13 @@ namespace BE
      public class Prescription
     {
         public int ID { get; set; }
-        public List<Medicine> Medicines { get; set; }
+        public string PatientName { get; set; }
+        public int PatientId { get; set; }
+        public string MedicineName { get; set; }
+        public int MedicineId { get; set; }
         public float amount { get; set; }
-        public int period { get; set; }
-        public DateTime StartData { get; set; }
-        public DateTime EndData { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public Doctor ReferringDoctor { get; set; }
     }
 }

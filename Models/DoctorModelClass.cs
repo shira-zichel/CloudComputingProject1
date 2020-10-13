@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
-namespace BE
+using System.Linq;
+using System.Web;
+using BE;
+namespace CloudComputingProject1.Models
 {
-    public class Doctor
+    public class DoctorModelClass
     {
         public string Name { get; set; }
         public string Specialization { get; set; }
@@ -13,11 +14,9 @@ namespace BE
         public long Phone { get; set; }
         public string MailAddress { get; set; }
         public DoctorLicense License { get; set; }
-       
-      
-        public override string ToString()
-        {
-            return $"id:{ID} name:{Name} WorkPlace:{WorkPlace}";
-        }
+        public string PicturePath { get; set; }
+
+
     }
+    
 }
