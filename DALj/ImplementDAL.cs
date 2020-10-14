@@ -215,13 +215,12 @@ namespace DAL
         }
 
         /////////////////Prescription//////////
-        public void AddPrescription(Prescription prescription,string patientId)
+        public void AddPrescription(Prescription prescription)
         {
             if (db.Prescriptions.ToList().Exists(item => item.ID == prescription.ID) == false)
             {
                 db.Prescriptions.Add(prescription);
-                Patient p = db.Patients.ToList().FirstOrDefault(item => item.ID == patientId);
-                p.Prescriptions.Add(prescription);
+                
                 
                 db.SaveChanges();
             }
@@ -230,6 +229,7 @@ namespace DAL
         public IEnumerable<Prescription> getAllPrescriptions()
         {
             return db.Prescriptions.ToList();
+            
         }
         
     }
@@ -249,7 +249,7 @@ namespace DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Database.SetInitializer<PharmacyContext>(new DropCreateDatabaseIfModelChanges<PharmacyContext>());
+            Database.SetInitializer<PharmacyContext>(new DropCreateDatabaseIfModelChanges<PharmacyContext>());
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
         private void FixEfProviderServicesProblem()

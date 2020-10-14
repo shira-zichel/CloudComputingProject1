@@ -5,8 +5,9 @@ using System.Linq;
 using BE;
 using DAL;
 using Microsoft.Office.Interop.Excel;
-using OpenQA.Selenium.Remote;
+
 using _Excel = Microsoft.Office.Interop.Excel;
+using OpenQA.Selenium.Remote;
 namespace BL
 {
     public class ImplementBL
@@ -203,12 +204,11 @@ namespace BL
             else
                 throw new Exception("patient doesn't exist");
         }
-        public List<Prescription> PatientPrescriptions(string id)
+        public IEnumerable<Prescription> PatientPrescriptions(string id)
         {
-            var patient = (from item in dal.getAllPatients().ToList()
-                           where item.ID == id
-                           select item).FirstOrDefault();
-            return patient.Prescriptions;
+            return dal.getAllPrescriptions().Where(item => item.PatientId == id);
+           
+
         }
         public IEnumerable<Patient> getAllPatients()
         {
@@ -216,7 +216,7 @@ namespace BL
         }
 
         /////////////////Prescription//////////
-        public void AddPrescription(Prescription prescription, string patientId)
+        public void AddPrescription(Prescription prescription)
         {
             if (prescription.ReferringDoctor.ExpirationDate.Date < DateTime.Today.Date)
             {
@@ -227,7 +227,7 @@ namespace BL
             //more checking
             try
             {
-                dal.AddPrescription(prescription,patientId);
+                dal.AddPrescription(prescription);
             }
             catch (Exception ex)
             {
@@ -254,7 +254,7 @@ namespace BL
             int sum = 0;
             foreach (var item in dal.getAllPrescriptions())
             {
-                if (item.StartData >= startDate && item.StartData <= endDate && item.Medicines.Exists(m => m.Name == medicine))
+                if (item.StartData >= startDate && item.StartData <= endDate && item.Medicine.Name == medicine)
                     sum += 1;
             }
             return sum;

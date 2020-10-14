@@ -12,7 +12,7 @@ namespace BE
         public string ID { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
-        public List<Prescription> Prescriptions { get; set; }
+        
         public override string ToString()
         {
             return $"id:{ID} firstname:{FirstName} LastName{LastName}";
