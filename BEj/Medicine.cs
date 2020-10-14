@@ -8,16 +8,11 @@ namespace BE
         public string Producer { get; set; }
         public string GenericName { get; set; }
         public string ActiveIngredients { get; set; }
-        //public string DoseCharacteristics { get; set; }
-        public string Picture { get; set; }
         public int ID { get; set; }
         public string MedecienId { get; set; }
-
         public string Ndc { get; set; }
         public string Properties { get; set; }
-        //public override string ToString()
-        //{
-        //    return $"id:{ID} name:{Name}";
-        //}
+
     }
 }
+

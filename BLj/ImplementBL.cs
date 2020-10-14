@@ -104,6 +104,19 @@ namespace BL
         {
             return dal.getAllDoctors();
         }
+        public void IsExistDoctor(string id)
+        {
+            try
+            {
+                dal.IsExistDoctor(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
         ///////////Medicine////////////////
         public void UpdateMedicine(Medicine medicine)
@@ -123,6 +136,7 @@ namespace BL
             try
             {
                 dal.AddMedicine(medicine);
+                
             }
             catch (Exception ex)
             {
@@ -218,7 +232,8 @@ namespace BL
         /////////////////Prescription//////////
         public void AddPrescription(Prescription prescription)
         {
-            if (prescription.ReferringDoctor.ExpirationDate.Date < DateTime.Today.Date)
+            Doctor d = getDoctor(prescription.ReferringDoctorId);
+            if (d.ExpirationDate.Date < DateTime.Today.Date)
             {
                 throw new Exception("Invalid doctor license");
             }
@@ -235,6 +250,7 @@ namespace BL
                 throw ex;
             }
         }
+
         public Prescription GetPrescription(string id)
         {
             Prescription p = (from item in dal.getAllPrescriptions().ToList()
@@ -254,7 +270,7 @@ namespace BL
             int sum = 0;
             foreach (var item in dal.getAllPrescriptions())
             {
-                if (item.StartData >= startDate && item.StartData <= endDate && item.Medicine.Name == medicine)
+                if (item.StartData >= startDate && item.StartData <= endDate && item.MedicineName == medicine)
                     sum += 1;
             }
             return sum;

@@ -1,0 +1,193 @@
+﻿@model CloudComputingProject1.Models.PrescriptionAndListOfPrescriptions
+
+@{
+    ViewBag.Title = "AddPrescription";
+}
+
+<br />
+
+<table class="table">
+
+    <tr>
+        <td>
+            <div class="col-md-push-6">
+                @using (Html.BeginForm("CreatePrescription", "Prescription"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <br />
+                        <h2>Add Prescription</h2>
+                        <h6>please enter details to continue</h6>
+                        <br />
+                        <table>
+                            <tr>
+                                <td style="tab-size">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Patient Name</label>
+                                        <div class="col-md-offset-4">
+                                            @Html.EditorFor(model => Model.prescription.PatientName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                            @Html.ValidationMessageFor(model => Model.prescription.PatientName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Patient Id</label>
+                                        <div class="col-md-offset-4">
+                                            @Html.EditorFor(model => Model.prescription.PatientId, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                            @Html.ValidationMessageFor(model => Model.prescription.PatientId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Medicine Name</label>
+                                        <div class="col-md-offset-4">
+                                            @Html.EditorFor(model => Model.prescription.MedicineName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                            @Html.ValidationMessageFor(model => Model.prescription.MedicineName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Medicine Id</label>
+                                        <div class="col-md-offset-4">
+                                            @Html.EditorFor(model => Model.prescription.MedicineId, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                            @Html.ValidationMessageFor(model => Model.prescription.MedicineId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Amount</label>
+                                        <div class="col-md-offset-4">
+                                            @Html.EditorFor(model => Model.prescription.amount, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                            @Html.ValidationMessageFor(model => Model.prescription.amount, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Start Date</label>
+                                        <div class="col-md-offset-4">
+                                            @Html.EditorFor(model => Model.prescription.StartDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                            @Html.ValidationMessageFor(model => Model.prescription.StartDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">End Date</label>
+                                        <div class="col-md-offset-4">
+                                            @Html.EditorFor(model => Model.prescription.EndDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                            @Html.ValidationMessageFor(model => Model.prescription.EndDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Create" class="btn btn-primary btn-lg" style="background-color:#83cd00;border-color:#83cd00;" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            </div>
+        </td>
+
+        <td>
+            <div class="col-md-offset-6">
+                <br />
+                <h2> Old Prescriptions:</h2>
+
+                <br />
+                <div style="width:100%;overflow:auto; max-height:470px;">
+                    <table class="table table-bordered table-hover">
+                        <tr style="background-color:#6ec000">
+                            <th>
+                                Patient Name
+                            </th>
+                            <th>
+                                Patient Id
+                            </th>
+                            <th>
+                                Medicine Name
+                            </th>
+                            <th>
+                                Medicine Id
+                            </th>
+                            <th>
+                                amount
+                            </th>
+                            <th>
+                                Start Date
+                            </th>
+                            <th>
+                                End Date
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.GetAllPrescriptions())
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PatientName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PatientId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MedicineName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MedicineId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.amount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EndDate)
+                                </td>
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </td>
+
+    </tr>
+
+</table>
+
+
+<style>
+    a.my-class {
+        color: #6ec000
+    }
+
+        a.my-class:active {
+            color: #6ec000
+        }
+
+        a.my-class:link {
+            color: #6ec000
+        }
+
+        a.my-class:visited {
+            color: #6ec000
+        }
+</style>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+
+}
+

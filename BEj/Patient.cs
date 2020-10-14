@@ -10,7 +10,8 @@ namespace BE
         public string LastName { get; set; }
         public int Idkey { get; set; }
         public string ID { get; set; }
-        public int Age { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
         public string Gender { get; set; }
         
         public override string ToString()

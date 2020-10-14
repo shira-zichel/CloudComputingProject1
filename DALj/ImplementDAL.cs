@@ -195,6 +195,13 @@ namespace DAL
                 throw new Exception("Patient  exsists already");
             }
         }
+        public void IsExistDoctor(string id)
+        {
+            if (db.Doctors.ToList().Exists(item => item.ID == id) == false)
+                throw new Exception("doctor doesn't exist");
+
+        }
+
         public void deletePatient(string id)
         {
             var p = (from item in db.Patients
@@ -249,7 +256,7 @@ namespace DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<PharmacyContext>(new DropCreateDatabaseIfModelChanges<PharmacyContext>());
+            //Database.SetInitializer<PharmacyContext>(new DropCreateDatabaseIfModelChanges<PharmacyContext>());
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
         private void FixEfProviderServicesProblem()

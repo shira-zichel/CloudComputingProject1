@@ -15,15 +15,7 @@ namespace CloudComputingProject1
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            ImplementBL implementBL = new ImplementBL();
-            implementBL.AddPatient(new Patient { FirstName = "shira", ID = "127485972"});
-            //implementBL.addAdministrator(new Administrator { ID = "76533", Password = 123, UserName = "jkl" });
-            //implementBL.AddDoctor(new Doctor { age = 45, ID = "47655868", Name = "shi", WorkPlace = "ghj",ExpirationDate=DateTime.Today });
-            //IEnumerable<Patient> d=   implementBL.getAllPatients();
-            //Patient f = implementBL.GetPatient("1297");
-            //implementBL.isAdministrator("12345");
-            
-            implementBL.ImportDataFromExcel();
+           
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
                 name: "Default",
