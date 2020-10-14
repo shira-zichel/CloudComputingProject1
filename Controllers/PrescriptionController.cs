@@ -36,15 +36,19 @@ namespace CloudComputingProject1.Controllers
             {
                 PrescriptionList = bl.PatientPrescriptions(Id.ToString()).ToList();
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Message = String.Format(ex.Message);
+                return View("Index","Home");
             }
             PrescriptionAndListOfPrescriptions p = new PrescriptionAndListOfPrescriptions();
             p.prescriptionsList = PrescriptionList;
             return View("AddPrescription", p);
         }
-        public ActionResult CreatePrescription(Prescription p)
+        public ActionResult CreatePrescription(string referringDoctorId, DateTime endData, DateTime startData,  float Amount, string patientId, string medicineName)
         {
+            PrescriptionAndListOfPrescriptions pr = new PrescriptionAndListOfPrescriptions();
+            Prescription p = new Prescription { amount = Amount, PatientId = patientId, EndData = endData, MedicineName = medicineName, ReferringDoctorId = "3", StartData = startData };
             BL.ImplementBL bl = new BL.ImplementBL();
             try
             {
@@ -53,12 +57,12 @@ namespace CloudComputingProject1.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = String.Format(ex.Message);
-                return View("AddPrescription");
+                return View("AddPrescription",pr);
 
             }
             ViewBag.Message = String.Format("The prescription was created successfully");
 
-            return View("AddPrescription", new PrescriptionAndListOfPrescriptions());
+            return View("DoctorEnterPatientsId", "Doctor");
         }
     }
 }

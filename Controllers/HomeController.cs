@@ -10,7 +10,7 @@ namespace CloudComputingProject1.Controllers
         public ActionResult Index()
         {
             BL.ImplementBL bL = new BL.ImplementBL();
-            bL.ImportDataFromExcel();
+            //bL.ImportDataFromExcel();
             return View();
         }
 

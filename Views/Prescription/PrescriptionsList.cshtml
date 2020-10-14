@@ -16,25 +16,25 @@
 <table class="table table-bordered table-hover">
     <tr style="background-color:#6ec000">
         <th>
-            @Html.DisplayNameFor(model => model.PatientName)
+            @Html.DisplayNameFor(model => model.ReferringDoctorId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PatientId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MedicineName)
+            @Html.DisplayNameFor(model => model.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MedicineId)
+            @Html.DisplayNameFor(model => model.MedicineName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.amount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.StartData)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.EndData)
         </th>
 
     </tr>
@@ -43,31 +43,35 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientName)
+                @Html.DisplayFor(modelItem => item.amount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PatientId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MedicineName)
+                @Html.DisplayFor(modelItem => item.ReferringDoctorId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MedicineId)
+                @Html.DisplayFor(modelItem => item.MedicineName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
+                @Html.DisplayFor(modelItem => item.StartData)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
+                @Html.DisplayFor(modelItem => item.EndData)
             </td>
 
         </tr>
     }
 
 </table>
+<div>
+    @Html.ActionLink("Back ", "LoginAdministratorBtn", "Home", new { Password = 12345 }, new { @class = "my-class" })
+</div>
+
 
 @if (ViewBag.Message != null)
 {

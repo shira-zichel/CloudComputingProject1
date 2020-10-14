@@ -251,16 +251,6 @@ namespace BL
             }
         }
 
-        public Prescription GetPrescription(string id)
-        {
-            Prescription p = (from item in dal.getAllPrescriptions().ToList()
-                              where item.ID == id
-                              select item).FirstOrDefault();
-            if (p != null)
-                return p;
-            else
-                throw new Exception("prescription doesn't exist");
-        }
         public IEnumerable<Prescription> getAllPrescriptions()
         {
             return dal.getAllPrescriptions();

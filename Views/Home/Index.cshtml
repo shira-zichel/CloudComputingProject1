@@ -21,8 +21,19 @@
                 <div>
                     <div class="btn-toolbar inline-flex flex-middle">
 
-                        <a href="@Url.Action("LoginAdministrator", "Home")" class="btn primary-btn text-uppercase btn-lg" style="width:45%">Admin</a>
-                        <a href="@Url.Action("logInDoctor", "Doctor")" class="btn primary-btn text-uppercase btn-lg" style="width:45%">Doctor</a>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <a href="@Url.Action("LoginAdministrator", "Home")" class="btn primary-btn text-uppercase btn-lg" style="width:100%">Admin</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("logInDoctor", "Doctor")" class="btn primary-btn text-uppercase btn-lg" style="width:100%">Doctor</a>
+                                </td>
+                            </tr>/>
+                        </table>
+
 
 
                     </div>
@@ -30,6 +41,8 @@
                 </div>
             </div>
         </div>
+    </div>
+
 </section>
 <!-- End banner Area -->
 <!-- Start facilities Area -->
