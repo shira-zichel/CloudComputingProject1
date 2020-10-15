@@ -207,16 +207,7 @@ namespace BL
                 throw ex;
             }
         }
-        public List<string> PatientHistory(string id)
-        {
-            List<string> medicines = new List<string>();
-            foreach (var item in dal.getAllPrescriptions())
-            {
-                if (item.PatientId == id)
-                    medicines.Add(item.MedicineName);
-            }
-            return medicines;
-        }
+     
 
         public Patient GetPatient(string id)
         {
