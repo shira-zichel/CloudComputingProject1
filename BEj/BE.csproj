@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Administrator.cs" />
     <Compile Include="Doctor.cs" />
+    <Compile Include="GoogleDriveFile.cs" />
     <Compile Include="Medicine.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Prescription.cs" />

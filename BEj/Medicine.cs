@@ -10,7 +10,7 @@ namespace BE
         public string ActiveIngredients { get; set; }
         public int ID { get; set; }
         public string MedecienId { get; set; }
-        public string Ndc { get; set; }
+        //public string Ndc { get; set; }
         public string Properties { get; set; }
 
     }

@@ -8,6 +8,9 @@ using Microsoft.Office.Interop.Excel;
 
 using _Excel = Microsoft.Office.Interop.Excel;
 using OpenQA.Selenium.Remote;
+using DALj;
+using System.Web;
+
 namespace BL
 {
     public class ImplementBL
@@ -273,7 +276,7 @@ namespace BL
             _Application excel = new _Excel.Application();
             Workbook wb = excel.Workbooks.Open(FilePath);
             Worksheet ws = wb.Worksheets[1];
-            string name = string.Empty, genericName = string.Empty, producer = string.Empty, active = string.Empty, proparties = string.Empty, ndc = string.Empty;
+            string name = string.Empty, genericName = string.Empty, producer = string.Empty, active = string.Empty, proparties = string.Empty, medicineId = string.Empty;
             for (int i = 2; i < 1001; i++)
             {
                 name = Convert.ToString(ws.Cells[1][i].Value2);
@@ -281,11 +284,11 @@ namespace BL
                 producer = Convert.ToString(ws.Cells[3][i].Value2);
                 active = Convert.ToString(ws.Cells[4][i].Value2);
                 proparties = Convert.ToString(ws.Cells[5][i].Value2);
-                ndc = Convert.ToString(ws.Cells[7][i].Value2);
-               
+                medicineId = Convert.ToString(ws.Cells[7][i].Value2);
+                             
                 using (var ctx = new PharmacyContext())
                 {
-                    var drug = new Medicine { Properties = proparties, ActiveIngredients = active, GenericName = genericName, Name = name, Producer = producer, Ndc = ndc };
+                    var drug = new Medicine { Properties = proparties, ActiveIngredients = active, GenericName = genericName, Name = name, Producer = producer, MedecienId = medicineId };
                     ctx.Medicines.Add(drug);
                     try
                     {
@@ -315,5 +318,25 @@ namespace BL
 
             }
 
+        }
+        GoogleDriveApi googleDriveDAL = new GoogleDriveApi();
+
+        public void DownloadFileByName(string fileName)
+        {
+            googleDriveDAL.DownloadGoogleFileByName(fileName);
+        }
+        public void UplaodFileOnDrive(HttpPostedFileBase file)
+        {
+            googleDriveDAL.UplaodFileOnDrive(file);
+        }
+
+        public void UplaodFileOnDriveInFolder(HttpPostedFileBase file, string folderName)
+        {
+            googleDriveDAL.UplaodFileOnDriveInFolder(file, folderName);
+        }
+
+        public void CreateFolder(string FolderName)
+        {
+            googleDriveDAL.CreateFolder(FolderName);
         }
     } }
