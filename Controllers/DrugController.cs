@@ -25,7 +25,7 @@ namespace CloudComputingProject1.Controllers
             {
                 foreach (var item in medicinesList)
                 {
-                    lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId, Ndc = item.Ndc, Properties = item.Properties });
+                    lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId, Properties = item.Properties });
                 }
 
             }
@@ -49,7 +49,7 @@ namespace CloudComputingProject1.Controllers
             {
                 foreach (var item in medicinesList)
                 {
-                    lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId, Ndc = item.Ndc, Properties = item.Properties });
+                    lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId,  Properties = item.Properties });
                 }
 
             }
@@ -71,7 +71,7 @@ namespace CloudComputingProject1.Controllers
             editmed.GenericName = medBE.GenericName;
             editmed.ActiveIngredients = medBE.ActiveIngredients;
             editmed.MedecienId = medBE.MedecienId;
-            editmed.Ndc = medBE.Ndc;
+            
             editmed.Properties = medBE.Properties;
             editmed.picturePath = "/img/b2.jpg";
             return View(editmed);
@@ -93,7 +93,7 @@ namespace CloudComputingProject1.Controllers
             {
                 foreach (var item in medicinesList)
                 {
-                    lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId, Ndc = item.Ndc, Properties = item.Properties });
+                    lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId, Properties = item.Properties });
                 }
 
             }
@@ -109,7 +109,7 @@ namespace CloudComputingProject1.Controllers
 
             BL.ImplementBL bl = new BL.ImplementBL();
             Medicine docBE = bl.GetMedicine(id);
-            DrugModel d = new DrugModel { Name = docBE.Name, Producer = docBE.Producer, GenericName = docBE.GenericName, ActiveIngredients = docBE.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = docBE.MedecienId, Ndc = docBE.Ndc, Properties = docBE.Properties };
+            DrugModel d = new DrugModel { Name = docBE.Name, Producer = docBE.Producer, GenericName = docBE.GenericName, ActiveIngredients = docBE.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = docBE.MedecienId,  Properties = docBE.Properties };
             return View(d);
         }
         public ActionResult SaveDrug(Medicine m, string filename)
@@ -132,7 +132,7 @@ namespace CloudComputingProject1.Controllers
             List<DrugModel> lists = new List<DrugModel>();
             foreach (var item in medList)
             {
-                lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId, Ndc = item.Ndc, Properties = item.Properties });
+                lists.Add(new DrugModel { Name = item.Name, Producer = item.Producer, GenericName = item.GenericName, ActiveIngredients = item.ActiveIngredients, picturePath = "/img/b1.jpg", MedecienId = item.MedecienId,  Properties = item.Properties });
             }
             return View("DrugsList", lists);
         }
