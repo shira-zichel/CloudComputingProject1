@@ -11,6 +11,7 @@ namespace CloudComputingProject1.Controllers
         {
             BL.ImplementBL bL = new BL.ImplementBL();
             //bL.ImportDataFromExcel();
+            
             return View();
         }
 

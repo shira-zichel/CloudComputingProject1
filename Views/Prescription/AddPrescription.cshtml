@@ -43,6 +43,7 @@
 
 
 
+
                                     <div class="form-group">
                                         <label class="control-label col-md-2">Amount</label>
                                         <div class="col-md-offset-4">
@@ -90,9 +91,9 @@
                 <div style="width:100%;overflow:auto; max-height:470px;">
                     <table class="table table-bordered table-hover">
                         <tr style="background-color:#6ec000">
-                            <th>
+                            @*<th>
                                 Patient Name
-                            </th>
+                            </th>*@
                             <th>
                                 Patient Id
                             </th>
@@ -100,7 +101,7 @@
                                 Medicine Name
                             </th>
                             <th>
-                                Medicine Id
+                                ReferringDoctor Id
                             </th>
                             <th>
                                 amount
@@ -122,6 +123,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.MedicineName)
                                 </td>
+                                 @*<td>
+                                    @Html.DisplayFor(modelItem => item.MedicineName)
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ReferringDoctorId)
                                 </td>

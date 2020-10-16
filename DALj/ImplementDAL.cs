@@ -19,6 +19,9 @@ namespace DAL
     {
         PharmacyContext db = new PharmacyContext();
         ///////////////Administrator//////////////
+        /// <summary>
+        /// </summary>
+        /// <param name="administrator"></param>
         public void UpdateAdministrator(Administrator administrator)
         {
             var admin = (from item in db.Administrators.ToList()

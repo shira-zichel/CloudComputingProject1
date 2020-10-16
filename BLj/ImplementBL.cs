@@ -16,6 +16,8 @@ namespace BL
     public class ImplementBL
     {
         DAL.ImplementDAL dal = new DAL.ImplementDAL();
+
+       
         ///////////////Administrator//////////////
         public void UpdateAdministrator(Administrator administrator)
         {
