@@ -242,6 +242,8 @@ namespace BL
                 throw new Exception("Invalid doctor license");
             }
             //check if the medicines don't conflict
+            //CheckDrugs check = new CheckDrugs();
+            //check.checkDrugs(prescription.MedicineName, prescription.Id, prescription.StartData, prescription.EndData);
 
             //more checking
             try
